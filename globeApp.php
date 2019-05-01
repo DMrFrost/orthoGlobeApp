@@ -104,11 +104,6 @@
       }
 
 
-
-
-
- 
-
   function visualize(dataSelected, mapType){
     //pass arguments each function call to decide what data to viasually display, and what map type to use
 
@@ -140,10 +135,7 @@
         break;
     }
 
-
-
-
-
+//set margins and positioning
     var margin = {top: 50, left: 0, right: 0, bottom:50},
         height = window.innerHeight - margin.top - margin.bottom, 
         width  = window.innerWidth - margin.left - margin.right - 100;
@@ -296,17 +288,6 @@ function keyIdToData(d){
     document.getElementById('countryDataBox').innerHTML = countryDataBox;
   }
 
-
-//individual function for each desired data call??
-
-function selectLiteracy(){
-
-}
-function selectGDP(){
-
-}
-
-
 window.alert("Click and Drag to Rotate Globe");
 
 
@@ -357,39 +338,5 @@ window.alert("Click and Drag to Rotate Globe");
     });
  
   </script>
-
-  <!--<script type="text/javascript">
-var dragging = function(d){
-    var c = projection.rotate();
-    projection.rotate([c[0] + d3.event.dx/6, c[1] - d3.event.dy/6])
-    map.selectAll('path').attr('d', path);
-    map.selectAll(".circles").attr("cx", function(d){
-                var coords = projection([d.Longitude_imp, d.Latitude_imp])
-                return coords[0];
-              })
-              .attr("cy", function(d){
-                var coords = projection([d.Longitude_imp, d.Latitude_imp])
-                return coords[1];
-              })
-    map.selectAll("circle")  
-     .style("display", function(d) {
-      var circle = [d.Longitude_imp, d.Latitude_imp];
-      var rotate = projection.rotate(); // antipode of actual rotational center.
-      
-      var center = [-rotate[0], -rotate[1]]
-      
-      var distance = d3.geoDistance(circle,center);
-      return (distance > Math.PI/2 ) ? 'none' : 'inline';
-     })
-       
-   }
-
-
-      var drag = d3.drag()
-      .on("drag", function(){
-        console.log("draggin")
-      })
-    
-  </script>-->
 </body>
 </html>
