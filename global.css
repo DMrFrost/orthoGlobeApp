@@ -1,0 +1,55 @@
+    *{
+      font-family: sans-serif;
+    }
+    p {
+      font-size: 0.85em;
+    }
+    #border-controller{
+      width: 100vw;
+      height: 100vh;
+      background-color: rgb(100 100 100);
+      border: 2px solid black;
+      z-index: 20;
+    }
+    #map{
+      width: 90vw;
+      height: 90vh;
+      margin: auto;
+      border: 1px yellow solid;
+      overflow: hidden;
+    }
+    svg {
+      background: white;
+      border: 1px solid black;
+      position: relative;
+      top: 50px;
+
+    }
+    #countryDataBox {
+      width: 25vw;
+      height: 25vh;
+      border: 1px solid black;
+      border-radius: 10px;
+      justify-content: center;
+      position: absolute;
+      top: 55px;
+      right: 10px;
+      background-color: rgba(200, 200, 200, 0.4);
+      padding-left: 20px;
+      z-index: 10;
+
+    }
+    #controller {
+      position: relative;
+      left: 200px;
+    }
+
+    .country {
+      stroke: #333333;
+      stroke-width: 0.5;
+      transition: 0.5s;
+    }
+    .hovered {
+      fill: rgb(100, 100, 150);
+    }
+    

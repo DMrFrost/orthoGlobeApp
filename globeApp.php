@@ -3,66 +3,9 @@
 <head>
   <title>globeApp</title>
   <meta charset="utf-8">
-  <style type="text/css">
-    *{
-      font-family: sans-serif;
-    }
-    p {
-      font-size: 0.85em;
-    }
-    #border-controller{
-      width: 100vw;
-      height: 100vh;
-      background-color: rgb(100 100 100);
-      border: 2px solid black;
-      z-index: 20;
-    }
-    #map{
-      width: 90vw;
-      height: 90vh;
-      margin: auto;
-      border: 1px yellow solid;
-      overflow: hidden;
-    }
-    svg {
-      background: white;
-      border: 1px solid black;
-      position: relative;
-      top: 50px;
-
-    }
-    #countryDataBox {
-      width: 25vw;
-      height: 25vh;
-      border: 1px solid black;
-      border-radius: 10px;
-      justify-content: center;
-      position: absolute;
-      top: 55px;
-      right: 10px;
-      background-color: rgba(200, 200, 200, 0.4);
-      padding-left: 20px;
-      z-index: 10;
-
-    }
-    #controller {
-      position: relative;
-      left: 200px;
-    }
-
-    .country {
-      stroke: #333333;
-      stroke-width: 0.5;
-      transition: 0.5s;
-    }
-    .hovered {
-      fill: rgb(100, 100, 150);
-    }
-    
-
-  </style>
-
+  <link rel = "stylesheet" type = "text/css" href = "global.css" />
 </head>
+
 
 <body>
   <div id="border-controller">
@@ -140,12 +83,8 @@
             //window ties the variable to the global window object
             countryStatistics = eval(XMLdataResult);
 
-console.log("returning countryStatistics: ")
-console.log(countryStatistics);
             //place country statistics into array of objects key = topoId
             keyIdToData();
-console.log("dataById: ");
-console.log(dataById);
             visualize(statisticsToDisplay, 'orthographic');
           }
         }
@@ -155,16 +94,10 @@ console.log(dataById);
         console.log("loading data from CSV file");
 
         d3.csv("countryStats1.csv", function(data){
-console.log("csvData: ");
-console.log(data);
         for(var i = 0; i < data.length; i++) {
           countryStatistics.push(data[i]);
         }
-console.log("countryStatistics:");
-console.log(countryStatistics);
         keyIdToData();
-console.log("dataById:");
-console.log(dataById);
         visualize(statisticsToDisplay, 'orthographic');
       
         })   
@@ -269,8 +202,6 @@ console.log(dataById);
 
   function ready (error, data){
       if (error) throw error;
-    console.log("topojson data: ")
-    console.log(data);
 
       //we set the the whole globe as a sphere to interact with drag events
     if(mapType == 'orthographic'){
@@ -290,9 +221,6 @@ console.log(dataById);
     });
 
 
-
-console.log("countries:")
-console.log(countries)
 
     svg.selectAll(".country")
       .data(countries)
@@ -315,7 +243,6 @@ console.log(countries)
 
           //function to call the corrsponding countryStatisit object to print idNumber
         let country = matchPath(this.__data__.id);
-console.log(country)
       appendCountryDataBox(country);
 
       })
@@ -333,7 +260,6 @@ function dataSelector(dataSelected) {
 
   //this function build dataById[] setting data keyed to idTopo
 function keyIdToData(d){
-  console.log(d);
   countryStatistics.forEach(function(d) {
     dataById[d.idTopo] = d;
   });  
@@ -341,7 +267,6 @@ function keyIdToData(d){
 
     //this function matches countryStatistcs data to each individual country when hovered
   function matchPath(pathId){
-console.log("pathID:" + pathId)
     for(var i = 0; i < countryStatistics.length; i++){
       if(pathId == countryStatistics[i].idTopo){
         return countryStatistics[i];
