@@ -36,14 +36,6 @@
 
 
 <script type="text/javascript">
-//NOTES:  TODO:
-//find relevant recent data (dual citizens in politics, military strength, size, bases, median and mean wages)
-//create regional (contenental) maps when zoomed, to enhance performance.
-//create country centric mode, to show all data of specific country, and their global political influence
-//Cite Data
-//Build Ranking table to show dataRange top or bottom #of results (dataRange based on dual slider)
-//rebuild TopoJson map to a finer detail (if performance allows)
-
 
 //main data variable, 
   //countryStatistics = mySQL query of country data
@@ -67,7 +59,7 @@
   }visualizeInit();
 
 
-
+  //this function to be called only when data sets are drawn from a MySQL database
       function getCountryDataSQL(){
         var dataXMLhttp = new XMLHttpRequest();
       //open the request and store parameters for the request.  GET (or POST) is method to send,
@@ -90,6 +82,7 @@
         }
       }
 
+     //In this case country statistics are stored in a local CSV file
       function getCountryDataCSV() {
         console.log("loading data from CSV file");
 
@@ -107,7 +100,7 @@
   function visualize(dataSelected, mapType){
     //pass arguments each function call to decide what data to viasually display, and what map type to use
 
-    //set up data and domains and ranges
+    //set up data and domains and ranges : range used for controlling color gradients
     var literacyDomain  = [30, 100];
     var gdpDomain       = [0, 55100];
     var populationDomain = [2000000, 1320000000];
@@ -288,6 +281,7 @@ function keyIdToData(d){
     document.getElementById('countryDataBox').innerHTML = countryDataBox;
   }
 
+  //Directions to user
 window.alert("Click and Drag to Rotate Globe");
 
 
