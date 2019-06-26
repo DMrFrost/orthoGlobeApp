@@ -3,3 +3,5 @@ An application to visualize statistical data of the world using topojson and d3.
 
 
 ![AppImg](/images/globeApp320.png)
+
+![Link to Live Demo](http://danefrost.com/projects/globeApp/globeApp.php)
