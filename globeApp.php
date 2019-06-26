@@ -43,10 +43,8 @@
 
   var countryStatistics = [];
   var dataById = [];
-
   var dataType =            "csv";  //change to "sql" to load data from MySQL database/"csv" load from csv file
   var statisticsToDisplay = "gdp";  //initial data to display onPageLoad,  "population", "gdp" etc
-
 
   function visualizeInit(){
       //retrieve data from MySQL or local CSV file
@@ -55,7 +53,6 @@
     }else if (dataType === 'csv'){
           getCountryDataCSV();
     }
-
   }visualizeInit();
 
 
@@ -84,15 +81,12 @@
 
      //In this case country statistics are stored in a local CSV file
       function getCountryDataCSV() {
-        console.log("loading data from CSV file");
-
         d3.csv("countryStats1.csv", function(data){
         for(var i = 0; i < data.length; i++) {
           countryStatistics.push(data[i]);
         }
         keyIdToData();
         visualize(statisticsToDisplay, 'orthographic');
-      
         })   
       }
 
@@ -140,13 +134,10 @@
           .attr("width", width + margin.left + margin.right)
           .append("g") //do I need this line of code?
           .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-    
-
 
       //set projection type to 2D map or 3d globe
     var projection = setMapType(mapType, width, height);
-
-
+    
       //pass path lines to projections
     var path = d3.geoPath()
       .projection(projection);
@@ -160,30 +151,24 @@
         //globe rotation coordenant variables
       var gpos0, 
           o0;
-
+        //detects drag initiation, saves current rotation coords
       function dragstarted(){
         gpos0 = projection.invert(d3.mouse(this));
         o0 = projection.rotate();  
       }
-
+        //calculates the change in dragged coordinates, re rendering the globe accordingly
       function dragged(){
         var gpos1 = projection.invert(d3.mouse(this));
         o0 = projection.rotate();
-
         var o1 = eulerAngles(gpos0, gpos1, o0);
         projection.rotate(o1);
-
         svg.selectAll("path").attr("d", path);
       }
     }
 
-
-
     d3.queue()
       .defer(d3.json, "world110m.json")
       .await(ready) 
-
-
 
   function ready (error, data){
       if (error) throw error;
@@ -197,15 +182,12 @@
           .attr("fill","lightblue");      
     }
 
- 
     countries = topojson.feature(data, data.objects.countries)
     //bind dataById data into countries topojson variable
     .features.map(function(d) {
       d.properties = dataById[d.id];
       return d
     });
-
-
 
     svg.selectAll(".country")
       .data(countries)
@@ -238,11 +220,6 @@
     }
   };
 
-  //function to plug in specified data
-function dataSelector(dataSelected) {
-
-}
-
   //this function build dataById[] setting data keyed to idTopo
 function keyIdToData(d){
   countryStatistics.forEach(function(d) {
@@ -259,7 +236,7 @@ function keyIdToData(d){
     }
   }
 
-//for ZOOM we need to pass a parameter here to scale
+//for ZOOM we need to pass a parameter here to scale, to be continued...
 
     //a function to call on visualize() to set projection type for map style.
   function setMapType(mapType, width, height) {
@@ -281,15 +258,12 @@ function keyIdToData(d){
     document.getElementById('countryDataBox').innerHTML = countryDataBox;
   }
 
-  //Directions to user
+  //Simple directions for user
 window.alert("Click and Drag to Rotate Globe");
+</script>
 
-
-
-  </script>
-
-  <script type="text/javascript">
-    //addEvent Listeners
+<script type="text/javascript">
+    //addEvent Listeners to controller
   var mapIsGlobe = true;
     document.getElementById("controller-mapType").addEventListener("click", function() {
       d3.select("svg").remove();
@@ -332,5 +306,6 @@ window.alert("Click and Drag to Rotate Globe");
     });
  
   </script>
+  
 </body>
 </html>
